@@ -2,56 +2,18 @@
 <html class="no-js ui-mobile-rendering" lang="en">
 	<head>
 		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
 		<title>UWL Teleport : Home</title>
 
 		<link rel="stylesheet" href="style/jquery.mobile-1.3.2.min.css" />
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="js/jquery.mobile-1.3.2.js"></script>
 		
-		<link rel="stylesheet" href="style/uwl-teleport.css" />
+		<link rel="stylesheet" href="style/uwl-teleport.css"/>
 		<script type="text/javascript" src="js/geoLocation.js"></script>
 		<script type="text/javascript" src="js/xmlReader.js"></script>
+		<script type="text/javascript" src="js/general.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUV4-YgcCcTMrO5kZH9Bpxf7O39hpY5HU&sensor=true" type="text/javascript"></script>
-		
-		<script type="text/javascript">
-			$(document).on("pageshow", "#busRoutes", function() {
-	            displayRoute();
-			});
-			
-			$(document).on("pageshow", "#maps", function() {
-	            showMap();
-			});
-			
-			$(document).on("pageshow", "#busStops", function() {
-			     var routeId = $('#routeIdForStop').attr( 'data-val');
-			     displayStop(routeId);
-			});
-			
-			$(document).on("pageshow", "#busTimes", function() {
-				var routeId = $('#routeIdForTime').attr( 'data-val');
-				var stopId = $('#stopIdForTime').attr( 'data-val');
-	            displayTime(routeId, stopId);
-	        });
-			
-			function setShuttleBusData(obj) {
-				var param = obj.getAttribute("data-param");
-				
-				if(obj.getAttribute("data-page") == "busStop") {
-					$('#routeIdForStop').attr( 'data-val',param);
-				}
-				
-				if(obj.getAttribute("data-page") == "busTime") {
-					$('#routeIdForTime').attr( 'data-val',param.split("-")[0]);
-					$('#stopIdForTime').attr( 'data-val',param.split("-")[1]);
-				}
-			}
-			
-			function resetShuttleBusData(obj) {
-				$('#routeIdForTime').attr( 'data-val','');
-				$('#stopIdForTime').attr( 'data-val','');
-			}
-		</script>
 	</head>
 	<body>
 		<!-- Begin Home page -->
@@ -75,11 +37,11 @@
 							</a>
 						</div>
 						<div class="main-menu-frame">
-							<a href="#buildings"> 
+							<a href="#buildingSites"> 
 								<div class="main-menu-img-frame">
 									<img src="style/images/uwl-buildings.jpg" class="main-menu-img">
 								</div>
-								<p>UWL Buildings</p>
+								<p>UWL Building</p>
 							</a>
 						</div>
 						<div class="main-menu-frame">
@@ -99,8 +61,8 @@
 							</a>
 						</div>
 					</div>
-					<div id="copyright">
-						2013 &copy; University of West London
+					<div class="copyright">
+						2013 &copy; University of West London 
 					</div>
 				</div>
 			</div>
@@ -113,7 +75,10 @@
 			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
 				<h1>Shuttle Bus</h1>
-				<a href="#more" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">More</a>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
 			</div>
 
 			<div data-role="content" class="main_body margin-left-right">
@@ -128,7 +93,7 @@
 							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
 						</li>
 						<li>
-							<a href="#buildings">Building</a>
+							<a href="#buildingSites">UWL Building</a>
 						</li>
 						<li>
 							<a href="#maps">Map</a>
@@ -145,7 +110,10 @@
 			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
 				<h1>Shuttle Bus</h1>
-				<a href="#more" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">More</a>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
 			</div>
 
 			<div data-role="content" class="main_body margin-left-right">
@@ -163,7 +131,7 @@
 							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
 						</li>
 						<li>
-							<a href="#buildings">Building</a>
+							<a href="#buildingSites">UWL Building</a>
 						</li>
 						<li>
 							<a href="#maps">Map</a>
@@ -180,7 +148,10 @@
 			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
 				<h1>Shuttle Bus</h1>
-				<a href="#more" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">More</a>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
 			</div>
 
 			<div data-role="content" class="main_body margin-left-right">
@@ -197,7 +168,7 @@
 							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
 						</li>
 						<li>
-							<a href="#buildings">Building</a>
+							<a href="#buildingSites">UWL Building</a>
 						</li>
 						<li>
 							<a href="#maps">Map</a>
@@ -208,136 +179,21 @@
 		</div>
 		<!-- End busTimes page -->
 		
-		<!-- Start buildings page -->
-		<div id="buildings" data-role="page" data-title="Buildings">
+		<!-- Start buildingSites page -->
+		<div id="buildingSites" data-role="page" data-title="Buildings">
 			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
-				<h1>Buildings</h1>
-				<a href="#more" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">More</a>
+				<h1>UWL Building</h1>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
 			</div>
 
 			<div data-role="content" class="main_body margin-left-right">
-				<h2>Click on building</h2>
-				<div data-role="collapsible-set" data-theme="d" data-content-theme="c">
-				    <div data-role="collapsible">
-				        <h3>Ealing Site</h3>
-				        <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department A1</a>
-							</li>
-							<li>
-								<a href="#">Department A2</a>
-							</li>
-							<li>
-								<a href="#">Department A3</a>
-							</li>
-							<li>
-								<a href="#">Department A4</a>
-							</li>
-							<li>
-								<a href="#">Department A5</a>
-							</li>
-						</ul>
-					</div>
-				    <div data-role="collapsible">
-				        <h3>Brentford Site</h3>
-				        <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department B1</a>
-							</li>
-							<li>
-								<a href="#">Department B2</a>
-							</li>
-							<li>
-								<a href="#">Department B3</a>
-							</li>
-						</ul>
-				    </div>
-				    <div data-role="collapsible">
-				        <h3>Villiers House</h3>
-				        <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department C1</a>
-							</li>
-							<li>
-								<a href="#">Department C2</a>
-							</li>
-							<li>
-								<a href="#">Department C3</a>
-							</li>
-						</ul>
-				    </div>
-				    <div data-role="collapsible">
-				        <h3>Walpole</h3>
-				        <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department D1</a>
-							</li>
-							<li>
-								<a href="#">Department D2</a>
-							</li>
-							<li>
-								<a href="#">Department D3</a>
-							</li>
-						</ul>
-				    </div>
-				    <div data-role="collapsible">
-				        <h3>Ealing Studios</h3>
-				       <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department E1</a>
-							</li>
-							<li>
-								<a href="#">Department E2</a>
-							</li>
-							<li>
-								<a href="#">Department E3</a>
-							</li>
-						</ul>
-				    </div>
-				    <div data-role="collapsible">
-				        <h3>Bramley Road Surgery</h3>
-				        <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department F1</a>
-							</li>
-							<li>
-								<a href="#">Department F2</a>
-							</li>
-							<li>
-								<a href="#">Department F3</a>
-							</li>
-						</ul>
-				    </div>
-				    <div data-role="collapsible">
-				        <h3>Vestry Hall</h3>
-				        <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department G1</a>
-							</li>
-							<li>
-								<a href="#">Department G2</a>
-							</li>
-							<li>
-								<a href="#">Department G3</a>
-							</li>
-						</ul>
-				    </div>
-				    <div data-role="collapsible">
-				        <h3>Student Village Housing</h3>
-				        <ul data-role="listview" data-inset="false">
-							<li>
-								<a href="#">Department H1</a>
-							</li>
-							<li>
-								<a href="#">Department H2</a>
-							</li>
-							<li>
-								<a href="#">Department H3</a>
-							</li>
-						</ul>
-				    </div>
-			    </div>
+				<h2>Building sites</h2>
+				<p>UWL buildings are located at various sites. The list of all the sites are provided below.</p>
+				<ul id="ulBuildingSites" data-role="listview" data-filter="true" data-filter-placeholder="Search building sites..." data-inset="true" data-theme="d"></ul>
 			</div>
 			
 			<div data-role="footer" data-theme="b" data-position="fixed">
@@ -347,7 +203,7 @@
 							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
 						</li>
 						<li>
-							<a href="#buildings">Building</a>
+							<a href="#buildingSites">UWL Building</a>
 						</li>
 						<li>
 							<a href="#maps">Map</a>
@@ -356,14 +212,90 @@
 				</nav>
 			</div>
 		</div>
-		<!-- End buildings page -->
+		<!-- End buildingSites page -->
+		
+		<!-- Start siteDepartments page -->
+		<div id="siteDepartments" data-role="page" data-title="Buildings">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
+				<h1>UWL Building</h1>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
+			</div>
+
+			<div data-role="content" class="main_body margin-left-right">
+				<div id="siteIdForDepartment" data-val=""></div>
+				<div id="siteLatLng" lat-val="" lng-val="" desc-val=""></div>
+				
+				<div id="divSiteDetails"></div>
+				<ul id="ulSiteDepartments" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Search departments..." data-theme="d"></ul>
+			</div>
+			
+			<div data-role="footer" data-theme="b" data-position="fixed">
+				<nav data-role="navbar" data-theme="b">
+					<ul>
+						<li>
+							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
+						</li>
+						<li>
+							<a href="#buildingSites">UWL Building</a>
+						</li>
+						<li>
+							<a href="#maps">Map</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- End siteDepartments page -->
+		
+		<!-- Start departmentDetails page -->
+		<div id="departmentDetails" data-role="page" data-title="Buildings">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
+				<h1>UWL Building</h1>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
+			</div>
+
+			<div data-role="content" class="main_body margin-left-right">
+				<div id="siteIdForDetails" data-val=""></div>
+				<div id="departmentIdForDetails" data-val=""></div>
+				
+				<div id="divDepartmentDetails"></div>
+			</div>
+			
+			<div data-role="footer" data-theme="b" data-position="fixed">
+				<nav data-role="navbar" data-theme="b">
+					<ul>
+						<li>
+							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
+						</li>
+						<li>
+							<a href="#buildingSites">UWL Building</a>
+						</li>
+						<li>
+							<a href="#maps">Map</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- End departmentDetails page -->
 		
 		<!-- Start map page -->
 		<div id="maps" data-role="page" data-title="More">
 			<div data-role="header" data-theme="b" data-position="fixed">
-				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
+				<a href="#home" class="headerButton" data-role="button" data-icon="home" data-iconpos="notext" data-inline="false">Home</a>
 				<h1>Map</h1>
-				<a href="#more" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">More</a>
+			    <div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
 			</div>
 
 			<div data-role="content"  class="main_body">
@@ -379,7 +311,7 @@
 							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
 						</li>
 						<li>
-							<a href="#buildings">Building</a>
+							<a href="#buildingSites">UWL Building</a>
 						</li>
 						<li>
 							<a href="#maps">Map</a>
@@ -395,25 +327,30 @@
 			<div data-role="header" data-theme="b" data-position="fixed">
 				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
 				<h1>More Options</h1>
-				<a href="#more" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b" data-inline="true">More</a>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
 			</div>
 
 			<div data-role="content" class="main_body margin-left-right">
 				<ul data-role="listview" data-inset="true" data-theme="d">
+					<!--
 					<li>
 						<a href="#news">News</a>
+					</li>
+					<li>
+						<a href="#information">More Info</a>
+					</li>
+					-->
+					<li>
+						<a href="#contactUs">Contact Us</a>
 					</li>
 					<li>
 						<a href="#usefulLinks">Useful Links</a>
 					</li>
 					<li>
-						<a href="#information">More Info</a>
-					</li>
-					<li>
 						<a href="#aboutUs">About Us</a>
-					</li>
-					<li>
-						<a href="#contactUs">Contact Us</a>
 					</li>
 				</ul>
 			</div>
@@ -425,7 +362,7 @@
 							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
 						</li>
 						<li>
-							<a href="#buildings">Building</a>
+							<a href="#buildingSites">UWL Building</a>
 						</li>
 						<li>
 							<a href="#maps">Map</a>
@@ -435,5 +372,133 @@
 			</div>
 		</div>
 		<!-- End more page -->
+		
+		<!-- Start contactUs page -->
+		<div id="contactUs" data-role="page" data-title="More">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
+				<h1>Contact Us</h1>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
+			</div>
+
+			<div data-role="content" class="main_body margin-left-right">
+				<div class='general'>
+					<b>Main switchboard</b><br/>
+					Telephone: 0800 036 8888<br/>
+					Telephone from outside the UK: +44 (0) 20 8231 246
+				</div>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed">
+				<nav data-role="navbar" data-theme="b">
+					<ul>
+						<li>
+							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
+						</li>
+						<li>
+							<a href="#buildingSites">UWL Building</a>
+						</li>
+						<li>
+							<a href="#maps">Map</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- End contactUs page -->
+		
+		<!-- Start usefulLinks page -->
+		<div id="usefulLinks" data-role="page" data-title="More">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
+				<h1>Useful Links</h1>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
+			</div>
+
+			<div data-role="content" class="main_body margin-left-right">
+				<div class='general'>
+					Here are some useful links that will help you to find your way around the university area.
+				</div>
+				<br/>
+				<ul class="normal-list" data-inset="true" data-theme="d" style="float: left;">
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.uwl.ac.uk/futurecampus/find-your-way-west-london-campus'">West London campus</a></li>
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.uwl.ac.uk/about-us/our-location/ealing-site'">Ealing site</a></li>
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.uwl.ac.uk/futurecampus/find-your-way-ealing-site'">Ealing site departments</a></li>
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.uwl.ac.uk/about-us/our-location/brentford-site'">Brentford site</a></li>
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.uwl.ac.uk/about-us/our-location/berkshire-hub'">Berkshire hub</a></li>
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.uwl.ac.uk/about-us/our-location/getting-university#shuttle'">UWL Shuttle bus</a></li>
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.tfl.gov.uk/tfl/livetravelnews/realtime/buses/default.html'">TFL real time bus service</a></li>
+					<li><a href="#" onclick="javascript: openInAppBrowser('http://www.uwl.ac.uk/about-us'">About Us</a></li>
+				</ul>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed">
+				<nav data-role="navbar" data-theme="b">
+					<ul>
+						<li>
+							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
+						</li>
+						<li>
+							<a href="#buildingSites">UWL Building</a>
+						</li>
+						<li>
+							<a href="#maps">Map</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- End usefulLinks page -->
+		
+		<!-- Start aboutUs page -->
+		<div id="aboutUs" data-role="page" data-title="More">
+			<div data-role="header" data-theme="b" data-position="fixed">
+				<a href="#home" data-role="button" data-icon="home" data-iconpos="notext">Home</a>
+				<h1>About Us</h1>
+				<div class="ui-btn-right">
+			    	<a href="#back" class="headerButton" data-role="button" data-icon="back" data-iconpos="notext" data-inline="false" data-rel="back">Back</a>
+					<a href="#more" class="headerButton" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="false">More</a>
+			    </div>
+			</div>
+
+			<div data-role="content" class="main_body margin-left-right">
+				<div class='general'>
+					This application was designed and developed to fulfill the requirement of 
+					'Advance Topics in Software Enngineering' (ATSE) group assignment. 
+					<br/></br>
+					The group (G4) involves following members:
+				</div>
+				</br></br>
+				<ul class="normal-list" data-theme="d" style="float: left;">
+					<li><a href="mailto:f_khilji2@yahoo.co.uk">M. Faisal Khilji</a></br> (Project Manager)</br><br /></li>
+					<li><a href="mailto:diptesh.shrestha@gmail.com">Diptesh Shrestha</a></br> (Lead Developer)</br></br></li>
+					<li><a href="mailto:temi.fakunle@gmail.com">Temitayo A. Fakunle</a></br> (Team memeber)</br></br></li>
+					<li><a href="mailto:santiago.presa@gmail.com">Santiago Presa</a></br> (Team memeber)</br></li>
+				</ul>
+			</div>
+
+			<div data-role="footer" data-theme="b" data-position="fixed">
+				<nav data-role="navbar" data-theme="b">
+					<ul>
+						<li>
+							<a href="#busRoutes" onclick="javascript: resetShuttleBusData();">Shuttle bus</a>
+						</li>
+						<li>
+							<a href="#buildingSites">UWL Building</a>
+						</li>
+						<li>
+							<a href="#maps">Map</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- End aboutUs page -->
 	</body>
 </html>

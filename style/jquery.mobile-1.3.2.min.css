@@ -2931,7 +2931,7 @@ input.ui-mini, .ui-mini input, textarea.ui-mini {
 div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text, .ui-input-search input.ui-input-text {
 	border: 0;
 	width: 100%;
-	padding: .4em 0;
+	padding: .2em 0;
 	margin: 0;
 	display: block;
 	background: transparent none;
@@ -3221,7 +3221,7 @@ ol.ui-listview .ui-li-jsnumbering:before {
 	padding: 0
 }
 .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li {
-	padding: .7em 15px;
+	padding: .4em 15px;
 	display: block
 }
 .ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb {

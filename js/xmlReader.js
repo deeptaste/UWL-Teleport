@@ -248,3 +248,217 @@ Date.prototype.getControlFmt = function() {
 	}
 	return hh + ":" + mm;
 };
+
+// A function to read site data from the XML file and diplay that data to the user
+function displaySite()
+{
+	var file = openXMLFile("data/building_data.xml");
+	var site = file.getElementsByTagName("SITE");
+	var data = "";
+	var rPos = "";
+		
+	for (i = 0; i < site.length; i++)
+	{
+	  	if (i == site.length - 1) {
+	  		rPos = "ui-last-child";
+  		}
+  		else if (i == 0) {
+	  		rPos = "ui-first-child";
+  		}
+  		else {
+  			rPos = "";
+  		}
+  		data += "<li data-corners=\"false\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"div\" data-icon=\"arrow-r\" data-iconpos=\"right\" ";
+	   	data += "data-theme=\"d\" class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li " + rPos + " ui-btn-up-d\">";
+	   	data += "<div class=\"ui-btn-inner ui-li\"><div class=\"ui-btn-text\">";
+	   	data += "<a data-param=\"" + i + "\" data-page=\"siteDepartment\" href=\"#siteDepartments\" class=\"ui-link-inherit\"";
+	   	
+	   	data += " data-lat=\"";
+	   	if(site[i].getElementsByTagName("LONGITUDE")[0].hasChildNodes()) {
+	   		data += site[i].getElementsByTagName("LONGITUDE")[0].childNodes[0].nodeValue;
+	   	}
+	   	
+	   	data += "\" data-lng=\"";
+	   	
+	   	if(site[i].getElementsByTagName("LATITUDE")[0].hasChildNodes()) {
+	   		data += site[i].getElementsByTagName("LATITUDE")[0].childNodes[0].nodeValue;
+	   	}
+	   	
+	   	data += "\" data-desc=\"" + site[i].getElementsByTagName("SITE_NAME")[0].childNodes[0].nodeValue + "\" onclick=\"javascript: setBuildingSiteData(this);\">";
+	   	data += site[i].getElementsByTagName("SITE_NAME")[0].childNodes[0].nodeValue;
+	   	data += "</a></div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\">&nbsp;</span></div></li>";
+	}
+	
+	writeData(data, "ulBuildingSites");
+}
+
+// A function to read stop data from the XML file and display that data to the uer
+function displayDepartments(siteID){
+	var file = openXMLFile("data/building_data.xml");
+	var site = file.getElementsByTagName("SITE");
+	var data = "";
+	var rPos = "";
+	
+	if(!(siteID >= 0 && siteID <= site.length)){
+		siteID = 0;
+	}
+	
+	data += "<h2>" + site[siteID].getElementsByTagName("SITE_NAME")[0].childNodes[0].nodeValue + "</h2>";
+	data += "<p><b>";
+	
+	if(site[siteID].getElementsByTagName("STREET_NAME")[0].hasChildNodes()) {
+		data += site[siteID].getElementsByTagName("STREET_NAME")[0].childNodes[0].nodeValue + ", ";
+	}
+	
+	if(site[siteID].getElementsByTagName("POST_CODE")[0].hasChildNodes()) {
+		data += site[siteID].getElementsByTagName("POST_CODE")[0].childNodes[0].nodeValue + "";
+	}
+	
+	data += " <a href=\"#maps\">(Show on Map)</a><br/><br/>";
+	
+	data += "List of departments in " + site[siteID].getElementsByTagName("SITE_NAME")[0].childNodes[0].nodeValue + "</p>";
+	
+	writeData(data, "divSiteDetails");
+	
+	data = "";	
+	var department = site[siteID].getElementsByTagName("DEPARTMENT");
+	
+	for (i = 0; i < department.length; i++)
+	{ 
+	  	if (i == department.length - 1) {
+	  		rPos = "ui-last-child";
+  		}
+  		else if (i == 0) {
+	  		rPos = "ui-first-child";
+  		}
+  		else {
+  			rPos = "";
+  		}
+  		data += "<li data-corners=\"false\" data-shadow=\"false\" data-iconshadow=\"true\" data-wrapperels=\"div\" data-icon=\"arrow-r\" data-iconpos=\"right\" ";
+  		data += "data-theme=\"d\" class=\"ui-btn ui-btn-icon-right ui-li-has-arrow ui-li " + rPos + " ui-btn-up-d\">";
+	   	data += "<div class=\"ui-btn-inner ui-li\"><div class=\"ui-btn-text\">";
+	   	data += "<a data-param=\"" + siteID + "-" + i + "\" data-page=\"departmentDetail\" href=\"#departmentDetails\" class=\"ui-link-inherit\" onclick=\"javascript: setBuildingSiteData(this);\">";
+	   	data += department[i].getElementsByTagName("ASSET_NAME")[0].childNodes[0].nodeValue;
+	   	data += "</a></div><span class=\"ui-icon ui-icon-arrow-r ui-icon-shadow\">&nbsp;</span></div></li>";
+	}
+	
+	writeData(data, "ulSiteDepartments");
+}
+
+// A function to read time data from the XML file and display that data to the uer
+function displayDepartmentDetails(siteID, departmentID){	
+	var file = openXMLFile("data/building_data.xml");
+	var site = file.getElementsByTagName("SITE");
+	var data = "";
+	
+	if(!(siteID >= 0 && siteID <= site.length)){
+		siteID = 0;
+	}
+
+	var department = site[siteID].getElementsByTagName("DEPARTMENT");
+	
+	if(!(departmentID >= 0 && departmentID <= department.length)){
+		departmentID = 0;
+	}
+	
+	var objDep = department[departmentID];
+	
+	data += "<h2>" + objDep.getElementsByTagName("ASSET_NAME")[0].childNodes[0].nodeValue + "</h2>";
+	
+	data += "<p>";
+	data += "<b>Block Name: </b>";
+	
+	if(objDep.getElementsByTagName("BLOCK_ID")[0].hasChildNodes()) {
+		data += objDep.getElementsByTagName("BLOCK_ID")[0].childNodes[0].nodeValue;
+	} 
+	else {
+		data += "-";
+	}
+	
+	data += "<br/><br/>";
+	data += "<b>Floor: </b>";
+	
+	if(objDep.getElementsByTagName("FLOOR_NUMBER")[0].hasChildNodes()) {
+		data += convertFloor(objDep.getElementsByTagName("FLOOR_NUMBER")[0].childNodes[0].nodeValue);
+	} 
+	else {
+		data += "-";
+	}
+
+	data += "<br/><br/>";
+	data += "<b>Room number(s): </b>";
+	
+	if(objDep.getElementsByTagName("STARTING_ROOM_NUMBER")[0].hasChildNodes()) {
+		data += objDep.getElementsByTagName("STARTING_ROOM_NUMBER")[0].childNodes[0].nodeValue;
+	
+		if(objDep.getElementsByTagName("ENDING_ROOM_NUMBER")[0].hasChildNodes()) {
+			data += " - " + objDep.getElementsByTagName("ENDING_ROOM_NUMBER")[0].childNodes[0].nodeValue;
+		}
+	} 
+	else {
+		data += "-";
+	}
+	
+	data += "<br/><br/>";
+	data += "<b>Contact: </b>";
+	
+	if(objDep.getElementsByTagName("CONTACT_NUMBER")[0].hasChildNodes()) {
+		data += objDep.getElementsByTagName("CONTACT_NUMBER")[0].childNodes[0].nodeValue;
+	} 
+	else {
+		data += "-";
+	}
+	
+	data += "<br/><br/>";
+	data += "<b>Extension: </b>";
+	
+	if(objDep.getElementsByTagName("EXTENSION")[0].hasChildNodes()) {
+		data += objDep.getElementsByTagName("EXTENSION")[0].childNodes[0].nodeValue;
+	} 
+	else {
+		data += "-";
+	}
+		
+	data += "<br/><br/><br/>";
+	data += "<div style='float:left; color: #006699; font-weight: bolder; font-size: 15px;'>";
+	data += site[siteID].getElementsByTagName("SITE_NAME")[0].childNodes[0].nodeValue + "<br/>";
+	
+	if(site[siteID].getElementsByTagName("STREET_NAME")[0].hasChildNodes()) {
+		data += site[siteID].getElementsByTagName("STREET_NAME")[0].childNodes[0].nodeValue + ", ";
+	}
+	
+	if(site[siteID].getElementsByTagName("POST_CODE")[0].hasChildNodes()) {
+		data += site[siteID].getElementsByTagName("POST_CODE")[0].childNodes[0].nodeValue + "<br/>";
+	}
+	
+	data += "University of West London</div>";
+		
+	writeData(data, "divDepartmentDetails");
+}
+
+function convertFloor(floorNum) {
+	if (floorNum == "0") {
+		return "Ground";
+	}
+	else if (floorNum == "1") {
+		return "1st";
+	}
+	else if (floorNum == "2") {
+		return "2nd";
+	}
+	else if (floorNum == "3") {
+		return "3rd";
+	}
+	else {
+		return floorNum + "th";
+	}
+}
+
+function ShowRoom(start, end) {
+	if (end != "") {
+		return start + " - " + end;
+	}
+	else {
+		return start;
+	}
+}
